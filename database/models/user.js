@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasOne(models.Role, {
+        foreignKey: 'roleId'
+      })
     }
   };
   User.init({
@@ -34,7 +37,9 @@ module.exports = (sequelize, DataTypes) => {
     photo: {
       type: DataTypes.STRING,
     },
-    roleId: DataTypes.INTEGER
+    roleId: {
+      type: DataTypes.INTEGER,
+    }
   }, {
     sequelize,
     modelName: 'User',
