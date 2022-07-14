@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Members.init({
-    name: DataTypes.STRING,
-    facebookUrl: DataTypes.STRING,
-    instagramUrl: DataTypes.STRING,
-    linkedinUrl: DataTypes.STRING,
-    image: DataTypes.STRING,
-    description: DataTypes.TEXT
+    name: DataTypes.STRING, allowNull: false,
+    facebookUrl: DataTypes.STRING, allowNull: true,
+    instagramUrl: DataTypes.STRING, allowNull: true,
+    linkedinUrl: DataTypes.STRING, allowNull: true,
+    image: DataTypes.STRING, allowNull: false,
+    description: DataTypes.TEXT, allowNull: true
   }, {
     sequelize,
     modelName: 'Members',
