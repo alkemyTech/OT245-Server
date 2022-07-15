@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-  Categories.init(
+  Category.init(
     {
       name: {
         type: DataTypes.STRING,
@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Categories",
+      modelName: "Category",
       timestamps: true,
       paranoid: true,
     }
   );
-  return Categories;
+  return Category;
 };
