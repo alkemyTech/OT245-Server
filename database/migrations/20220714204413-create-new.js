@@ -22,7 +22,12 @@ module.exports = {
       },
       //foreign key
       categoryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model:'Category',
+          key: 'id'
+        },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
