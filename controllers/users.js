@@ -15,7 +15,7 @@ module.exports = {
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error creating user] - [POST]: ${error.message}`
+        `[Error creating user] - [auth - POST]: ${error.message}`
       )
       next(httpError)
     }

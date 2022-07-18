@@ -1,5 +1,5 @@
 const { ErrorObject } = require('../helpers/error')
-const { User } = require('../database/models/user')
+const { User } = require('../database/models')
 
 exports.registUser = async (body) => {
   try {
@@ -7,6 +7,7 @@ exports.registUser = async (body) => {
     if (existantUser) {
       throw new ErrorObject('Email already in use', 404)
     }
+    body.roleId = 1
     const newUser = await User.create(body)
     if (!newUser) {
       throw new ErrorObject('User registration failed', 404)
