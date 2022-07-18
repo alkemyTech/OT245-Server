@@ -27,5 +27,6 @@ exports.user = {
       options: { checkFalsy: true },
     },
     isStrongPassword: true,
+    errorMessage: 'weak password',
   },
 }
