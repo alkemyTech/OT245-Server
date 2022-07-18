@@ -10,12 +10,12 @@ module.exports = {
       endpointResponse({
         res,
         message: 'User successfuly created',
-        body: user
+        body: user,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error creating user] - [auth - POST]: ${error.message}`
+        `[Error creating user] - [auth - POST]: ${error.message}`,
       )
       next(httpError)
     }
