@@ -11,22 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      New.belongsTo(models.Category,{
-        foreignKey: 'id',
-        targetKey: 'categoryId'
+      New.belongsTo(models.Category, {
+        foreignKey: 'categoryId',
       })
     }
   };
   New.init({
     name: DataTypes.STRING,
     content: DataTypes.TEXT,
-    image: DataTypes.STRING,
-    categoryId: DataTypes.INTEGER
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'New',
     timestamps: true,
-    paranoid: true
+    paranoid: true,
   });
   return New;
 };

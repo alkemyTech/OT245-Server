@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Role.hasMany(models.User, {
-        foreignKey: 'roleId'
+        foreignKey: 'roleId',
       })
     }
   };
@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING
   }, {
     sequelize,
+    modelName: 'Role',
     timestamps: true,
-    modelName: 'Role'
   });
   return Role;
 };
