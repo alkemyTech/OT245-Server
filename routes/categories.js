@@ -1,9 +1,9 @@
 const express = require('express')
-const { get, getId } = require('../controllers/categories')
+const { get, getCategoryById } = require('../controllers/categories')
 
 const router = express.Router()
 
 router.get('/', get)
-router.get('/:id', getId)
+router.get('/:id', getCategoryById)
 
 module.exports = router

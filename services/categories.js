@@ -12,7 +12,7 @@ exports.getCategories = async () => {
   }
 }
 
-exports.getCategoryId = async (id) => {
+exports.getCategoryById = async (id) => {
   try {
     const category = await Category.findByPk(id)
 
