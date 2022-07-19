@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const { ErrorObject } = require('../helpers/error')
 const { User } = require('../database/models')
 
-exports.registUser = async (body) => {
+exports.createUser = async (body) => {
   try {
     const existantUser = this.getUserByEmail(body.email)
     if (existantUser) {
