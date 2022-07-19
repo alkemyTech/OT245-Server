@@ -14,12 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Testimonial.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    image: DataTypes.STRING,
+    content: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Testimonial',
+    timestamps: true,
     paranoid: true,
-    timestamps: true
   });
   return Testimonial;
 };
