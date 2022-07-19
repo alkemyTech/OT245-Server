@@ -22,6 +22,10 @@ exports.createUser = async (body) => {
 }
 
 exports.getUserByEmail = async (email) => {
-  const user = await User.findOne({ where: { email } })
-  return user
+  try {
+    const user = await User.findOne({ where: { email } })
+    return user
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
 }
