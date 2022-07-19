@@ -11,3 +11,31 @@ exports.getCategories = async () => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.updateCategory = async (req) => {
+  try {
+    const { id } = req.params
+    const { name, description, image } = req.body
+    await this.getCategoryById(id)
+    const updatedCategory = await Category.update({
+      name,
+      description,
+      image,
+    }, { where: { id } })
+    return updatedCategory
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.getCategoryById = async (id) => {
+  try {
+    const category = await Category.findOne({ where: { id } })
+    if (!category) {
+      throw new ErrorObject('id category not found', 404)
+    }
+    return category
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
