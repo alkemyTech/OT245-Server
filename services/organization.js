@@ -1,5 +1,5 @@
 const { ErrorObject } = require('../helpers/error')
-const { Organization } = require('../database/models/organization')
+const { Organization } = require('../database/models')
 
 exports.getOrganization = async () => {
   try {
