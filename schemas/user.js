@@ -1,4 +1,4 @@
-exports.user = {
+exports.register = {
   firstName: {
     isString: { errorMessage: 'firstName is not a string' },
     exists: {
