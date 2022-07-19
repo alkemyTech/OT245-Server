@@ -1,7 +1,7 @@
 const { ErrorObject } = require('../helpers/error')
 const { Organization } = require('../database/models')
 
-exports.getOrganization = async () => {
+exports.getOrganizations = async () => {
   try {
     const getOrganizations = await Organization.findAll({
       attributes: ['name', 'image', 'phone', 'address'],
