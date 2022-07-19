@@ -3,6 +3,6 @@ const { get } = require('../controllers/categories')
 
 const router = express.Router()
 
-router.get('/categories', get)
+router.get('/', get)
 
 module.exports = router

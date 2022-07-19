@@ -6,6 +6,6 @@ const router = express.Router()
 
 // example of a route with index controller get function
 router.get('/', get)
-router.use('/', categories)
+router.use('/categories', categories)
 
 module.exports = router
