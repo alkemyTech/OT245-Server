@@ -1,3 +1,4 @@
+const createHttpError = require('http-errors')
 const { checkSchema, validationResult } = require('express-validator')
 
 exports.schemaValidator = (schema) => [
@@ -7,7 +8,12 @@ exports.schemaValidator = (schema) => [
       validationResult(req).throw()
       return next()
     } catch (error) {
-      return res.status(400).json({ error: error.array() })
+      const errors = error.array().map((err) => err.msg)
+      const httpError = createHttpError(
+        400,
+        `[Error on data validation] - [register - POST]: ${errors}`,
+      )
+      return next(httpError)
     }
   },
 ]
