@@ -3,13 +3,13 @@ const { Organization } = require('../database/models')
 
 exports.getOrganization = async () => {
   try {
-    const getOrganization = await Organization.findAll({
+    const getOrganizations = await Organization.findAll({
       attributes: ['name', 'image', 'phone', 'address'],
     })
-    if (!getOrganization) {
+    if (!getOrganizations) {
       throw new ErrorObject('No information found', 404)
     }
-    return getOrganization
+    return getOrganizations
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
