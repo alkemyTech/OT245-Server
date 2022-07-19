@@ -19,6 +19,7 @@ exports.getCategoryId = async (id) => {
     if (!category) {
       throw new ErrorObject('Category not found', 404)
     }
+    return category
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
