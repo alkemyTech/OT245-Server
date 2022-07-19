@@ -23,9 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     aboutUsText: DataTypes.TEXT
   }, {
     sequelize,
-    paranoid: true,
-    tableName: true,
     modelName: 'Organization',
+    timestamps: true,
+    paranoid: true,
   });
   return Organization;
 };

@@ -14,17 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Member.init({
-    name: DataTypes.STRING, allowNull: false,
-    facebookUrl: DataTypes.STRING, allowNull: true,
-    instagramUrl: DataTypes.STRING, allowNull: true,
-    linkedinUrl: DataTypes.STRING, allowNull: true,
-    image: DataTypes.STRING, allowNull: false,
-    description: DataTypes.TEXT, allowNull: true,
+    name: DataTypes.STRING,
+    facebookUrl: DataTypes.STRING,
+    instagramUrl: DataTypes.STRING,
+    linkedinUrl: DataTypes.STRING,
+    image: DataTypes.STRING,
+    description: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Member',
+    timestamps: true,
     paranoid: true,
-    timestamps: true
   });
   return Member;
 };
