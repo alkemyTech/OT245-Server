@@ -4,7 +4,7 @@ const { User } = require('../database/models')
 
 exports.registUser = async (body) => {
   try {
-    const existantUser = await User.findOne({ where: { email: body.email } })
+    const existantUser = this.getUserByEmail(body.email)
     if (existantUser) {
       throw new ErrorObject('Email already in use', 404)
     }
@@ -19,4 +19,9 @@ exports.registUser = async (body) => {
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
+}
+
+exports.getUserByEmail = async (email) => {
+  const user = await User.findOne({ where: { email } })
+  return user
 }
