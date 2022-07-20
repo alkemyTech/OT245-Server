@@ -1,8 +1,12 @@
 const express = require('express')
-const { get, post, getCategoryById, put } = require('../controllers/categories')
+const {
+  get,
+  getCategoryById,
+  put,
+  post,
+} = require('../controllers/categories')
 const { schemaValidator } = require('../middlewares/validator')
 const { category } = require('../schemas/categories')
-
 
 const router = express.Router()
 
