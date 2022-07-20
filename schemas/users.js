@@ -32,7 +32,7 @@ exports.register = {
   },
 }
 
-exports.login = {
+exports.userLogin = {
   email: {
     isEmail: { errorMessage: 'invalid email' },
     exists: {

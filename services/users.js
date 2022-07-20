@@ -37,3 +37,19 @@ exports.getPassword = (myPlaintextPassword, hash) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.createLogin = async (email, password) => {
+  try {
+    const user = await this.getUserByEmail(email)
+    if (user) {
+      const hash = user.password
+      const login = this.getPassword(password, hash)
+      if (login) {
+        return user
+      }
+    }
+    return null
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
