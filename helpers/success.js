@@ -12,8 +12,8 @@ const endpointResponse = ({
     message,
     body,
     options,
-  });
-};
+  })
+}
 
 const endpointResponseCreated = ({
   res,
@@ -29,10 +29,10 @@ const endpointResponseCreated = ({
     message,
     body,
     options,
-  });
-};
+  })
+}
 
 module.exports = {
   endpointResponse,
   endpointResponseCreated,
-};
+}
