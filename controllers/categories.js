@@ -20,7 +20,6 @@ module.exports = {
       next(httpError)
     }
   }),
-
   getCategoryById: catchAsync(async (req, res, next) => {
     try {
       const category = await getCategoryById(req.params.id)
@@ -54,5 +53,4 @@ module.exports = {
       next(httpError)
     }
   }),
-
 }
