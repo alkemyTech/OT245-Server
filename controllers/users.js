@@ -1,4 +1,5 @@
 const createHttpError = require('http-errors')
+const { ErrorObject } = require('../helpers/error')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
 const { createUser, createLogin } = require('../services/users')
@@ -32,17 +33,11 @@ module.exports = {
           body: user,
         })
       }
-      endpointResponse({
-        res,
-        status: false,
-        code: 403,
-        message: '{ok: false}',
-        body: null,
-      })
+      throw new ErrorObject('{ok: false}', 403)
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error retrieving login] - [user- login]: ${error.message}`,
+        `[Error retrieving user] - [auth - login]: ${error.message}`,
       )
       next(httpError)
     }
