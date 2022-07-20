@@ -25,17 +25,10 @@ exports.getCategoryById = async (id) => {
   }
 }
 
-exports.updateCategory = async (req) => {
+exports.postCategory = async (category) => {
   try {
-    const { id } = req.params
-    const { name, description, image } = req.body
-    await this.getCategoryById(id)
-    const updatedCategory = await Category.update({
-      name,
-      description,
-      image,
-    }, { where: { id } })
-    return updatedCategory
+    const newCategory = await Category.create(category)
+    return newCategory
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
