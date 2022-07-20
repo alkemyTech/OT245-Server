@@ -11,3 +11,16 @@ exports.getCategories = async () => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.getCategoryById = async (id) => {
+  try {
+    const category = await Category.findByPk(id)
+
+    if (!category) {
+      throw new ErrorObject('Category not found', 404)
+    }
+    return category
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
