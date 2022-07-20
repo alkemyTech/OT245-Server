@@ -40,3 +40,15 @@ exports.updateCategory = async (req) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.deleteCategory = async (id) => {
+  try {
+    const category = await Category.destroy({ where: { id } })
+    if (!category) {
+      throw new ErrorObject('Category not found', 404)
+    }
+    return category
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
