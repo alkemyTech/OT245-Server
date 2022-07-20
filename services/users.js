@@ -29,3 +29,11 @@ exports.getUserByEmail = async (email) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.getPassword = async (myPlaintextPassword, hash) => {
+  try {
+    return await bcrypt.compare(myPlaintextPassword, hash)
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
