@@ -25,17 +25,29 @@ module.exports = {
     try {
       const { email, password } = req.body
       const user = await getUserByEmail(email)
-      if ((user) && (getPassword(password, user.password))) {
-        endpointResponse({
-          res,
-          message: 'User successfuly created',
-          body: user,
-        })
+      if (user) {
+        if (getPassword(password, user.password)) {
+          endpointResponse({
+            res,
+            message: 'Login successfuly created',
+            body: user,
+          })
+        } else {
+          endpointResponse({
+            res,
+            status: false,
+            code: 403,
+            message: '{ok: false}',
+            body: null,
+          })
+        }
       } else {
         endpointResponse({
           res,
+          status: false,
+          code: 403,
           message: '{ok: false}',
-          body: user,
+          body: null,
         })
       }
     } catch (error) {

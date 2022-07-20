@@ -30,9 +30,9 @@ exports.getUserByEmail = async (email) => {
   }
 }
 
-exports.getPassword = async (myPlaintextPassword, hash) => {
+exports.getPassword = (myPlaintextPassword, hash) => {
   try {
-    return await bcrypt.compare(myPlaintextPassword, hash)
+    return bcrypt.compareSync(myPlaintextPassword, hash)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
