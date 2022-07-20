@@ -7,8 +7,9 @@ const news = require('./news')
 const router = express.Router()
 
 router.get('/', get)
-router.use('/news', news)
+
 router.use('/auth', auth)
 router.use('/categories', categories)
+router.use('/news', news)
 
 module.exports = router
