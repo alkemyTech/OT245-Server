@@ -33,3 +33,19 @@ exports.postCategory = async (category) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.updateCategory = async (req) => {
+  try {
+    const { id } = req.params
+    const { name, description, image } = req.body
+    await this.getCategoryById(id)
+    const updatedCategory = await Category.update({
+      name,
+      description,
+      image,
+    }, { where: { id } })
+    return updatedCategory
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
