@@ -22,6 +22,34 @@ exports.createUser = async (body) => {
 }
 
 exports.getUserByEmail = async (email) => {
-  const user = await User.findOne({ where: { email } })
-  return user
+  try {
+    const user = await User.findOne({ where: { email } })
+    return user
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.getPassword = (myPlaintextPassword, hash) => {
+  try {
+    return bcrypt.compareSync(myPlaintextPassword, hash)
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.createLogin = async (email, password) => {
+  try {
+    const user = await this.getUserByEmail(email)
+    if (user) {
+      const hash = user.password
+      const login = this.getPassword(password, hash)
+      if (login) {
+        return user
+      }
+    }
+    return null
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
 }

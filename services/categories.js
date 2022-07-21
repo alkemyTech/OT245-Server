@@ -25,6 +25,15 @@ exports.getCategoryById = async (id) => {
   }
 }
 
+exports.postCategory = async (category) => {
+  try {
+    const newCategory = await Category.create(category)
+    return newCategory
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
 exports.updateCategory = async (req) => {
   try {
     const { id } = req.params
