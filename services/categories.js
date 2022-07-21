@@ -25,6 +25,15 @@ exports.getCategoryById = async (id) => {
   }
 }
 
+exports.postCategory = async (category) => {
+  try {
+    const newCategory = await Category.create(category)
+    return newCategory
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
 exports.updateCategory = async (req) => {
   try {
     const { id } = req.params
@@ -36,6 +45,18 @@ exports.updateCategory = async (req) => {
       image,
     }, { where: { id } })
     return updatedCategory
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.deleteCategory = async (id) => {
+  try {
+    const category = await Category.destroy({ where: { id } })
+    if (!category) {
+      throw new ErrorObject('Category not found', 404)
+    }
+    return category
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
