@@ -5,6 +5,7 @@ const auth = require('./auth')
 const categories = require('./categories')
 const organizations = require('./organizations')
 const users = require('./users')
+const news = require('./news')
 
 const router = express.Router()
 
@@ -15,5 +16,6 @@ router.use('/auth', auth)
 router.use('/categories', categories)
 router.use('/organization', organizations)
 router.use('/users', users)
+router.use('/news', news)
 
 module.exports = router
