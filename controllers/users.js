@@ -32,8 +32,9 @@ module.exports = {
           message: 'Login successfuly created',
           body: user,
         })
+      } else {
+        throw new ErrorObject('{ok: false}', 403)
       }
-      throw new ErrorObject('{ok: false}', 403)
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
