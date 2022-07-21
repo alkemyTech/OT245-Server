@@ -4,7 +4,7 @@ const { User } = require('../database/models')
 
 exports.createUser = async (body) => {
   try {
-    const existantUser = this.getUserByEmail(body.email)
+    const existantUser = await this.getUserByEmail(body.email)
     if (existantUser) {
       throw new ErrorObject('Email already in use', 404)
     }
