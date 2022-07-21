@@ -4,7 +4,7 @@ const { User } = require('../database/models')
 
 exports.createUser = async (body) => {
   try {
-    const existantUser = this.getUserByEmail(body.email)
+    const existantUser = await this.getUserByEmail(body.email)
     if (existantUser) {
       throw new ErrorObject('Email already in use', 404)
     }
@@ -49,6 +49,19 @@ exports.createLogin = async (email, password) => {
       }
     }
     return null
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.deleteUser = async (id) => {
+  try {
+    const user = await User.findByPk(id)
+    if (user) {
+      User.destroy({ where: { id: user.id } })
+    } else {
+      throw new ErrorObject('UserId deleted failed', 404)
+    }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
