@@ -75,7 +75,7 @@ module.exports = {
       endpointResponse({
         res,
         message: 'Authorized user successfuly retrieved',
-        body: response
+        body: response,
       })
     } catch (error) {
       const httpError = createHttpError(
