@@ -7,7 +7,7 @@ const { createUser, createLogin, deleteUser } = require('../services/users')
 module.exports = {
   post: catchAsync(async (req, res, next) => {
     try {
-      const user = createUser(req.body)
+      const user = await createUser(req.body)
       endpointResponse({
         res,
         message: 'User successfuly created',
