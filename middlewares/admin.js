@@ -1,16 +1,19 @@
 const createHttpError = require('http-errors')
 const { User } = require('../database/models')
-const { Role } = require('../database/models')
+// const { Role } = require('../database/models')
 const { ErrorObject } = require('../helpers/error')
 
 exports.verifyAdmin = async (req, res, next) => {
   try {
-    const { username } = req.body
+    const { email } = req.user
     const user = await User.findOne({
-      where: username,
+      where: {
+        email,
+        roleId: 1,
+      },
     })
-    const admin = Role.findByPk(user.id)
-    if (admin) {
+
+    if (user) {
       return next()
     }
     throw new ErrorObject('Unauthorized', 401)
