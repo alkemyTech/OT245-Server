@@ -70,7 +70,7 @@ module.exports = {
 
   getUserByToken: catchAsync(async (req, res, next) => {
     try {
-      const user = await decodeToken(req.headers.authorization)
+      const { user } = await decodeToken(req.headers.authorization)
       const response = await getUserById(user.id)
       endpointResponse({
         res,
