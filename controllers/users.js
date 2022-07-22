@@ -7,8 +7,7 @@ const {
   createUser,
   createLogin,
   deleteUser,
-  getUserByEmail,
-  getUserById
+  getUserById,
 } = require('../services/users')
 
 module.exports = {
@@ -71,7 +70,7 @@ module.exports = {
 
   getUserByToken: catchAsync(async (req, res, next) => {
     try {
-      const { user } = decodeToken(req.headers.authorization)
+      const user = await decodeToken(req.headers.authorization)
       const response = await getUserById(user.id)
       endpointResponse({
         res,
