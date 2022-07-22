@@ -2,7 +2,7 @@ const createHttpError = require('http-errors')
 const { ErrorObject } = require('../helpers/error')
 const { verifyToken } = require('./jwt')
 
-const validateUser = async (req, res, next) => {
+const validateToken = async (req, res, next) => {
   try {
     const token = req.header('Authorization')
     if (!token) {
@@ -21,5 +21,5 @@ const validateUser = async (req, res, next) => {
 }
 
 module.exports = {
-  validateUser,
+  validateToken,
 }
