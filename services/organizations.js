@@ -14,3 +14,12 @@ exports.getOrganizations = async () => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.createOrganization = async (organization) => {
+  try {
+    const newOrganization = await Organization.create(organization)
+    return newOrganization
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
