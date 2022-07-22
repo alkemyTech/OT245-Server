@@ -9,7 +9,7 @@ const verifyOwnership = (req, res, next) => {
     const { user } = decodeToken(token)
     const id = getUserByEmail(user.email)
     if (user.id !== id || user.role !== 1) {
-      throw new ErrorObject('Token user id doesnt match', 403)
+      throw new ErrorObject('user id doesnt match', 403)
     }
     next()
   } catch (error) {
