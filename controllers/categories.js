@@ -1,12 +1,13 @@
 const createHttpError = require('http-errors')
+const { endpointResponse } = require('../helpers/success')
+const { catchAsync } = require('../helpers/catchAsync')
 const {
   getCategories,
   getCategoryById,
   updateCategory,
   postCategory,
+  deleteCategory,
 } = require('../services/categories')
-const { endpointResponse } = require('../helpers/success')
-const { catchAsync } = require('../helpers/catchAsync')
 
 module.exports = {
   get: catchAsync(async (req, res, next) => {
@@ -70,6 +71,22 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error creating category] - [Category - POST]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+  destroy: catchAsync(async (req, res, next) => {
+    try {
+      const response = await deleteCategory(req.params.id)
+      endpointResponse({
+        res,
+        message: 'category deleted successfully',
+        body: response,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error deleting category] - [categories - DELETE]: ${error.message}`,
       )
       next(httpError)
     }
