@@ -66,3 +66,32 @@ exports.deleteUser = async (id) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.updateUserById = async (req) => {
+  try {
+    const { id } = req.params
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      photo,
+    } = req.body
+    const user = await User.findByPk(id)
+    if (user) {
+      const hashedPassword = await bcrypt.hash(user.password, 10)
+      user.password = hashedPassword
+      await User.update({
+        firstName,
+        lastName,
+        email,
+        password,
+        photo,
+      }, { where: { id: user.id } })
+      return user
+    }
+    throw new ErrorObject('UserId not found', 404)
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
