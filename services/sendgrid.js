@@ -16,7 +16,6 @@ const postMail = async (email) => {
   }
   try {
     await sgMail.send(msg)
-    console.log('email enviado')
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
