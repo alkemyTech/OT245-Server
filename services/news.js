@@ -12,8 +12,11 @@ exports.postNew = async (body) => {
 
 exports.getNewById = async (id) => {
   try {
-    const existentNew = await New.findByPk(id)
-    return existentNew
+    const newById = await New.findByPk(id)
+    if (!newById) {
+      throw new ErrorObject('New not found', 404)
+    }
+    return newById
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
