@@ -12,8 +12,8 @@ exports.postNew = async (body) => {
 
 exports.getNewById = async (id) => {
   try {
-    const user = await New.findByPk(id)
-    return user
+    const existentNew = await New.findByPk(id)
+    return existentNew
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
