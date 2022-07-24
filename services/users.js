@@ -30,6 +30,15 @@ exports.getUserByEmail = async (email) => {
   }
 }
 
+exports.getUserById = async (id) => {
+  try {
+    const user = await User.findOne({ where: { id } })
+    return user
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
 exports.getPassword = (myPlaintextPassword, hash) => {
   try {
     return bcrypt.compareSync(myPlaintextPassword, hash)
