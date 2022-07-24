@@ -7,6 +7,7 @@ const {
   createUser,
   createLogin,
   deleteUser,
+  updateUserById,
   getUserById,
 } = require('../services/users')
 
@@ -63,6 +64,23 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error deleting user] - [user - DELETE]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  put: catchAsync(async (req, res, next) => {
+    try {
+      const updatedUser = await updateUserById(req)
+      endpointResponse({
+        res,
+        message: 'User successfuly updated',
+        body: updatedUser,
+        })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error updating user] - [user - PUT]: ${error.message}`,
       )
       next(httpError)
     }
