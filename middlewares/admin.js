@@ -9,7 +9,7 @@ exports.verifyAdmin = async (req, res, next) => {
     const { user } = await decodeToken(token)
     const isAdmin = await User.findOne({
       where: {
-        email: user.user.email,
+        email: user.email,
         roleId: 1,
       },
     })
