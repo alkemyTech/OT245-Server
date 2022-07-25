@@ -14,11 +14,11 @@ const {
 module.exports = {
   post: catchAsync(async (req, res, next) => {
     try {
-      const user = await createUser(req.body)
+      const response = await createUser(req.body)
       endpointResponse({
         res,
         message: 'User successfuly created',
-        body: user,
+        body: response,
       })
     } catch (error) {
       const httpError = createHttpError(
