@@ -1,12 +1,11 @@
 const { Router } = require('express')
-const express = require('express')
-const { get, post } = require('../controllers/organizations')
+const { get, put } = require('../controllers/organizations')
 const { schemaValidator } = require('../middlewares/validator')
 const { organization } = require('../schemas/organizations')
 
-const router = express.Router()
+const router = Router()
 
 router.get('/public', get)
-router.post('/public', schemaValidator(organization), post)
+router.put('/public/:id', schemaValidator(organization), put)
 
 module.exports = router

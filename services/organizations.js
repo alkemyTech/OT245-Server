@@ -15,10 +15,26 @@ exports.getOrganizations = async () => {
   }
 }
 
-exports.createOrganization = async (organization) => {
+exports.updateOrganization = async (req) => {
   try {
-    const newOrganization = await Organization.create(organization)
-    return newOrganization
+    const { id } = req.params
+    const {
+      name, image, address, email, phone, welcomeText, aboutUsText,
+    } = req.body
+    await Organization.update({
+      name,
+      image,
+      address,
+      email,
+      phone,
+      welcomeText,
+      aboutUsText,
+    }, { where: { id } })
+    const updatedOrganization = await Organization.findByPk(id)
+    if (!updatedOrganization) {
+      throw new ErrorObject('Not found', 404)
+    }
+    return updatedOrganization
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
