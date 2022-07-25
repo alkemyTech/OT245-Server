@@ -2,16 +2,23 @@ const createHttpError = require('http-errors')
 const { ErrorObject } = require('../helpers/error')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
-const { createUser, createLogin, deleteUser } = require('../services/users')
+const { decodeToken } = require('../middlewares/jwt')
+const {
+  createUser,
+  createLogin,
+  deleteUser,
+  updateUserById,
+  getUserById,
+} = require('../services/users')
 
 module.exports = {
   post: catchAsync(async (req, res, next) => {
     try {
-      const user = await createUser(req.body)
+      const response = await createUser(req.body)
       endpointResponse({
         res,
         message: 'User successfuly created',
-        body: user,
+        body: response,
       })
     } catch (error) {
       const httpError = createHttpError(
@@ -57,6 +64,41 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error deleting user] - [user - DELETE]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  put: catchAsync(async (req, res, next) => {
+    try {
+      const updatedUser = await updateUserById(req)
+      endpointResponse({
+        res,
+        message: 'User successfuly updated',
+        body: updatedUser,
+        })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error updating user] - [user - PUT]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  getUserByToken: catchAsync(async (req, res, next) => {
+    try {
+      const { user } = await decodeToken(req.headers.authorization)
+      const response = await getUserById(user.id)
+      endpointResponse({
+        res,
+        message: 'Authorized user successfuly retrieved',
+        body: response,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error fetching user data] - [auth - GET]: ${error.message}`,
       )
       next(httpError)
     }
