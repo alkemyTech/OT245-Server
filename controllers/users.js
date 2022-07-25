@@ -76,7 +76,7 @@ module.exports = {
         res,
         message: 'User successfuly updated',
         body: updatedUser,
-      })
+        })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
