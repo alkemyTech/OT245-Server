@@ -30,6 +30,15 @@ exports.getUserByEmail = async (email) => {
   }
 }
 
+exports.getUserById = async (id) => {
+  try {
+    const user = await User.findOne({ where: { id } })
+    return user
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
 exports.getPassword = (myPlaintextPassword, hash) => {
   try {
     return bcrypt.compareSync(myPlaintextPassword, hash)
@@ -62,6 +71,35 @@ exports.deleteUser = async (id) => {
     } else {
       throw new ErrorObject('UserId deleted failed', 404)
     }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.updateUserById = async (req) => {
+  try {
+    const { id } = req.params
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      photo,
+    } = req.body
+    const user = await User.findByPk(id)
+    if (user) {
+      const hashedPassword = await bcrypt.hash(user.password, 10)
+      user.password = hashedPassword
+      await User.update({
+        firstName,
+        lastName,
+        email,
+        password,
+        photo,
+      }, { where: { id: user.id } })
+      return user
+    }
+    throw new ErrorObject('UserId not found', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }

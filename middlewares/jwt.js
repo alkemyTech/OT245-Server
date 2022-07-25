@@ -12,14 +12,26 @@ const generateToken = (user) => new Promise((resolve, reject) => {
 
 const decodeToken = (token) => {
   try {
-    const { user } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+    const user = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
     return user
   } catch (error) {
     return error
   }
 }
 
+const verifyToken = (token) => {
+  try {
+    const { user } = decodeToken(token)
+    if (!user) {
+      return false
+    }
+    return true
+  } catch (error) {
+    return error
+  }
+}
 module.exports = {
   generateToken,
   decodeToken,
+  verifyToken,
 }
