@@ -21,7 +21,7 @@ module.exports = {
     }
   }),
 
-  getById: catchAsync(async (req, res, next) => {
+getById: catchAsync(async (req, res, next) => {
     try {
       const news = await getNewById(req.params.id)
       endpointResponse({
