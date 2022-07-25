@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const { ErrorObject } = require('../helpers/error')
 const { User } = require('../database/models')
+const { generateToken } = require('../middlewares/jwt')
 const { postMail } = require('./sendgrid')
 
 exports.createUser = async (body) => {
@@ -17,7 +18,8 @@ exports.createUser = async (body) => {
       throw new ErrorObject('User registration failed', 404)
     }
     await postMail(newUser.email)
-    return newUser
+    const token = await generateToken(newUser)
+    return token
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -73,6 +75,35 @@ exports.deleteUser = async (id) => {
     } else {
       throw new ErrorObject('UserId deleted failed', 404)
     }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.updateUserById = async (req) => {
+  try {
+    const { id } = req.params
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      photo,
+    } = req.body
+    const user = await User.findByPk(id)
+    if (user) {
+      const hashedPassword = await bcrypt.hash(user.password, 10)
+      user.password = hashedPassword
+      await User.update({
+        firstName,
+        lastName,
+        email,
+        password,
+        photo,
+      }, { where: { id: user.id } })
+      return user
+    }
+    throw new ErrorObject('UserId not found', 404)
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
