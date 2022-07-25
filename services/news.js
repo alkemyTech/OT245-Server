@@ -40,3 +40,16 @@ exports.updateNew = async (req) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.deleteNew = async (id) => {
+  try {
+    const existentNew = await this.getNewById(id)
+    if (!existentNew || existentNew.length === 0) {
+      throw new ErrorObject('New not found', 404)
+    }
+    const deletedNew = await New.destroy({ where: { id } })
+    return deletedNew
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
