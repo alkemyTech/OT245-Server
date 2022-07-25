@@ -6,7 +6,7 @@ const { decodeToken } = require('./jwt')
 exports.verifyAdmin = async (req, res, next) => {
   try {
     const token = req.header('Authorization')
-    const user = await decodeToken(token)
+    const { user } = await decodeToken(token)
     const isAdmin = await User.findOne({
       where: {
         email: user.user.email,
