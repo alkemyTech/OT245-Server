@@ -18,6 +18,14 @@ module.exports = {
       order: {
         type: Sequelize.INTEGER
       },
+      organizationId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Organizations',
+          key:'id',
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
