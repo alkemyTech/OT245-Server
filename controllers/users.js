@@ -9,9 +9,27 @@ const {
   deleteUser,
   updateUserById,
   getUserById,
+  getAllUsers,
 } = require('../services/users')
 
 module.exports = {
+  list: catchAsync(async (req, res, next) => {
+    try {
+      const users = await getAllUsers()
+      endpointResponse({
+        res,
+        message: 'Users listed',
+        body: users,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error users listed ] - [users - GET]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
   post: catchAsync(async (req, res, next) => {
     try {
       const response = await createUser(req.body)
