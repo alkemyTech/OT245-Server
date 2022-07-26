@@ -25,6 +25,13 @@ exports.createUser = async (body) => {
   }
 }
 
+exports.getAllUsers = async () => {
+  const users = await User.findAll({
+    attributes: ['firstName', 'email', 'lastName'],
+  })
+  return users
+}
+
 exports.getUserByEmail = async (email) => {
   try {
     const user = await User.findOne({ where: { email } })
@@ -84,23 +91,22 @@ exports.updateUserById = async (req) => {
   try {
     const { id } = req.params
     const {
-      firstName,
-      lastName,
-      email,
-      password,
-      photo,
+      firstName, lastName, email, password, photo,
     } = req.body
     const user = await User.findByPk(id)
     if (user) {
       const hashedPassword = await bcrypt.hash(user.password, 10)
       user.password = hashedPassword
-      await User.update({
-        firstName,
-        lastName,
-        email,
-        password,
-        photo,
-      }, { where: { id: user.id } })
+      await User.update(
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+          photo,
+        },
+        { where: { id: user.id } },
+      )
       return user
     }
     throw new ErrorObject('UserId not found', 404)
