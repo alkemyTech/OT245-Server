@@ -1,8 +1,7 @@
 const createHttpError = require('http-errors')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
-const { getSlides, deleteSlide } = require('../services/slides')
-const { getSlides, getSlideById } = require('../services/slides')
+const { getSlides, getSlideById, deleteSlide } = require('../services/slides')
 
 module.exports = {
   get: catchAsync(async (req, res, next) => {
