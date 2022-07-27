@@ -6,6 +6,8 @@ const categories = require('./categories')
 const organizations = require('./organizations')
 const users = require('./users')
 const news = require('./news')
+const contacts = require('./contacts')
+const slides = require('./slides')
 
 const router = express.Router()
 
@@ -17,5 +19,7 @@ router.use('/categories', categories)
 router.use('/organization', organizations)
 router.use('/users', users)
 router.use('/news', news)
+router.use('/contacts', contacts)
+router.use('/slides', slides)
 
 module.exports = router

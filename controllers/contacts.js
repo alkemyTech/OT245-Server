@@ -1,38 +1,37 @@
 const createHttpError = require('http-errors')
-const { getOrganizations, updateOrganization } = require('../services/organizations')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
+const { postContact, getContacts } = require('../services/contacts')
 
 module.exports = {
-  get: catchAsync(async (req, res, next) => {
+  post: catchAsync(async (req, res, next) => {
     try {
-      const response = await getOrganizations()
+      const response = await postContact(req.body)
       endpointResponse({
         res,
-        message: 'Organization information',
+        message: 'Contact registered successfully',
         body: response,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error retrieving info] - [organization - GET]: ${error.message}`,
+        `[Error registering contact] - [contacts - POST]: ${error.message}`,
       )
       next(httpError)
     }
   }),
-
-  put: catchAsync(async (req, res, next) => {
+  get: catchAsync(async (req, res, next) => {
     try {
-      const response = await updateOrganization(req)
+      const contacts = await getContacts()
       endpointResponse({
         res,
-        message: 'Organization updated successfully',
-        body: response,
+        message: 'Contacts retrieved successfully',
+        body: contacts,
       })
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error retrieving info] - [organization - PUT]: ${error.message}`,
+        `[Error retrieving contacts] - [contacts - GET]: ${error.message}`,
       )
       next(httpError)
     }
