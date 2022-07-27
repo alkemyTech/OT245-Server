@@ -15,16 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   };
   Member.init({
     name: DataTypes.STRING,
-    facebookUrl: DataTypes.STRING,
-    instagramUrl: DataTypes.STRING,
-    linkedinUrl: DataTypes.STRING,
-    image: DataTypes.STRING,
-    description: DataTypes.STRING
+    image: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Member',
     timestamps: true,
-    paranoid: true,
+    paranoid: true
   });
   return Member;
 };

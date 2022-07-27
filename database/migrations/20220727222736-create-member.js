@@ -10,27 +10,11 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      facebookUrl: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      instagramUrl: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      linkedinUrl: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        allowNull:false
       },
       image: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -41,7 +25,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       deletedAt: {
-        allowNull: true,
+        allowNull:true,
         type: Sequelize.DATE
       }
     });
