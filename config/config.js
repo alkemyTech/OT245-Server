@@ -10,7 +10,6 @@ module.exports = {
     dialect: 'mysql',
     aws_access_key_id: process.env.AWS_ACCESS_KEY_ID,
     aws_secret_access_key: process.env.AWS_SECRET_ACCESS,
-    aws_bucket_name: process.env.AWS_BUCKET_NAME,
     aws_region: process.env.AWS_REGION,
   },
 
@@ -21,5 +20,8 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'mysql',
+    aws_access_key_id: process.env.AWS_ACCESS_KEY_ID,
+    aws_secret_access_key: process.env.AWS_SECRET_ACCESS,
+    aws_region: process.env.AWS_REGION,
   },
 }
