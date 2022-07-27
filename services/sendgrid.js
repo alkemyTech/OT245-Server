@@ -6,12 +6,12 @@ require('dotenv').config()
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-const postMail = async (email) => {
+const postMail = async (email, subject = 'Bienvendio a alkemy') => {
   const organization = await Organization.findAll()
   const msg = {
     to: email,
     from: process.env.EMAILFROM,
-    subject: 'Bienvendio a alkemy',
+    subject,
     html: html(organization[0]),
   }
   try {
