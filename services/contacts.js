@@ -17,6 +17,15 @@ exports.postContact = async (body) => {
   }
 }
 
+exports.getContacts = async () => {
+  try {
+    const contacts = await Contact.findAll()
+    return contacts
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
 exports.getContactByEmail = async (email) => {
   try {
     const contact = await Contact.findOne({ where: { email } })
