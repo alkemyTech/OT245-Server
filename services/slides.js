@@ -36,3 +36,22 @@ exports.deleteSlide = async (id) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.updateSlide = async (req) => {
+  try {
+    const { id } = req.params
+    const { image, text, order } = req.body
+    await Slide.update({
+      image,
+      text,
+      order,
+    }, { where: { id } })
+    const slide = await Slide.findByPk(id)
+    if (!slide) {
+      throw new ErrorObject('Slide not found', 404)
+    }
+    return slide
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
