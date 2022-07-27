@@ -22,13 +22,6 @@ module.exports = {
     }
   }),
 
-  destroy: catchAsync(async (req, res, next) => {
-    try {
-      const { id } = req.params
-      const response = await deleteSlide(id)
-      endpointResponse({
-        res,
-        message: 'Slide deleted successfully',
   getById: catchAsync(async (req, res, next) => {
     try {
       const { id } = req.params
@@ -41,8 +34,25 @@ module.exports = {
     } catch (error) {
       const httpError = createHttpError(
         error.statusCode,
-        `[Error deleting slide] - [slides - DELETE]: ${error.message}`,
         `[Error finding slides] - [slides - GET]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  destroy: catchAsync(async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const response = await deleteSlide(id)
+      endpointResponse({
+        res,
+        message: 'Slide deleted successfully',
+        body: response,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error deleting slide] - [slides - DELETE]: ${error.message}`,
       )
       next(httpError)
     }
