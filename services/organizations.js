@@ -4,7 +4,7 @@ const { Organization } = require('../database/models')
 exports.getOrganizations = async () => {
   try {
     const getOrganizations = await Organization.findAll({
-      attributes: ['name', 'image', 'phone', 'address'],
+      attributes: ['name', 'image', 'phone', 'address', 'facebook', 'instagram', 'linkedin'],
     })
     if (!getOrganizations) {
       throw new ErrorObject('No information found', 404)

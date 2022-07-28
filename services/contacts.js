@@ -1,5 +1,6 @@
 const { ErrorObject } = require('../helpers/error')
 const { Contact } = require('../database/models')
+const { postMail } = require('./sendgrid')
 
 exports.postContact = async (body) => {
   try {
@@ -11,6 +12,7 @@ exports.postContact = async (body) => {
     if (!contact) {
       throw new ErrorObject('failed contact registration', 403)
     }
+    await postMail(contact.email, 'Thank you for contacting us')
     return contact
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
