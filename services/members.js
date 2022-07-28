@@ -14,3 +14,16 @@ exports.postMember = async (body) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.deleteMember = async (id) => {
+  try {
+    const member = await Member.findByPk(id)
+    if (!member) {
+      throw new ErrorObject('Member not found', 400)
+    }
+    await member.destroy()
+    return member
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
