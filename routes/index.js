@@ -8,6 +8,7 @@ const users = require('./users')
 const news = require('./news')
 const contacts = require('./contacts')
 const slides = require('./slides')
+const testimonials = require('./testimonials')
 
 const router = express.Router()
 
@@ -21,5 +22,6 @@ router.use('/users', users)
 router.use('/news', news)
 router.use('/contacts', contacts)
 router.use('/slides', slides)
+router.use('/testimonials', testimonials)
 
 module.exports = router
