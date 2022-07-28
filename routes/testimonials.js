@@ -1,13 +1,14 @@
-const express = require('express')
-const { schemaValidator } = require('../middlewares/validator')
-const { validateToken } = require('../middlewares/validateUser')
+const { Router } = require('express')
+const { destroy } = require('../controllers/testimonials')
 const { verifyAdmin } = require('../middlewares/admin')
+const { validateToken } = require('../middlewares/validateUser')
 const { postTestimonial } = require('../schemas/testimonials')
 const { post, put } = require('../controllers/testimonials')
+const { schemaValidator } = require('../middlewares/validator')
 
-const router = express.Router()
-
+const router = Router()
 router.post('/', [validateToken, verifyAdmin, schemaValidator(postTestimonial)], post)
-router.put('/:id', [validateToken, verifyAdmin, schemaValidator(postTestimonial)], put)
+router.delete('/:id', [validateToken, verifyAdmin], destroy)
+router.put('/:id', [validateToken, verifyAdmin], put)
 
 module.exports = router
