@@ -41,16 +41,17 @@ exports.updateSlide = async (req) => {
   try {
     const { id } = req.params
     const { image, text, order } = req.body
-    await Slide.update(
-      {
-        image,
-        text,
-        order,
-      },
-      { where: { id } },
-    )
     const slide = await Slide.findByPk(id)
-    if (!slide) {
+    if (slide) {
+      await Slide.update(
+        {
+          image,
+          text,
+          order,
+        },
+        { where: { id } },
+      )
+    } else {
       throw new ErrorObject('Slide not found', 404)
     }
     return slide
