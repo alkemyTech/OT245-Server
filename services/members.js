@@ -47,3 +47,12 @@ exports.deleteMember = async (id) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.getMembers = async () => {
+  try {
+    const members = await Member.findAll()
+    return members
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}

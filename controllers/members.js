@@ -1,7 +1,7 @@
 const createHttpError = require('http-errors')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
-const { postMember, updateMember, deleteMember } = require('../services/members')
+const { postMember, updateMember, deleteMember, getMembers } = require('../services/members')
 
 module.exports = {
   post: catchAsync(async (req, res, next) => {
@@ -51,6 +51,23 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error deleting member] - [member - DELETE]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  get: catchAsync(async (req, res, next) => {
+    try {
+      const members = await getMembers()
+      endpointResponse({
+        res,
+        message: 'Members retrieved successfully',
+        body: members,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error retrieving members] - [members - GET]: ${error.message}`,
       )
       next(httpError)
     }
