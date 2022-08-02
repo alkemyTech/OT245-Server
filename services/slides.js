@@ -12,6 +12,15 @@ exports.getSlides = async () => {
   }
 }
 
+exports.listSlideByOrder = async () => {
+  try {
+    const orderedSlides = await Slide.findAll({ order: [['order', 'ASC']] })
+    return orderedSlides
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
 exports.getSlideById = async (id) => {
   try {
     const slides = await Slide.findByPk(id)
