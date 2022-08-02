@@ -1,7 +1,7 @@
 const createHttpError = require('http-errors')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
-const { postTestimonial } = require('../services/testimonials')
+const { postTestimonial, updateTestimonial } = require('../services/testimonials')
 const { deleteTestimonial } = require('../services/testimonials')
 
 module.exports = {
@@ -38,4 +38,22 @@ module.exports = {
       next(httpError)
     }
   }),
+
+  put: catchAsync(async (req, res, next) => {
+    try {
+      const response = await updateTestimonial(req)
+      endpointResponse({
+        res,
+        message: 'Testimonial updated successfully',
+        body: response,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error retrieving info] - [Testimonial - PUT]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
 }
