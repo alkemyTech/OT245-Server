@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.belongsTo(models.Role, {
         foreignKey: 'roleId',
+      }),
+      User.hasMany(models.Comment, {
+        foreignKey: 'userId'
       })
     }
   };
