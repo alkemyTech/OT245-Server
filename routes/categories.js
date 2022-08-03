@@ -8,14 +8,13 @@ const {
   post,
   destroy,
 } = require('../controllers/categories')
-const { verifyAdmin } = require('../middlewares/admin')
 
 const router = express.Router()
 
 router.get('/', get)
 router.get('/:id', getCategoryById)
-router.post('/', verifyAdmin, schemaValidator(category), post)
-router.put('/:id', verifyAdmin, put)
-router.delete('/:id', verifyAdmin, destroy)
+router.post('/', schemaValidator(category), post)
+router.put('/:id', put)
+router.delete('/:id', destroy)
 
 module.exports = router
