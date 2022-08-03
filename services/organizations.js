@@ -19,7 +19,16 @@ exports.updateOrganization = async (req) => {
   try {
     const { id } = req.params
     const {
-      name, image, address, email, phone, welcomeText, aboutUsText,
+      name,
+      image,
+      address,
+      email,
+      phone,
+      welcomeText,
+      aboutUsText,
+      facebook,
+      instagram,
+      linkedin,
     } = req.body
     await Organization.update({
       name,
@@ -29,6 +38,9 @@ exports.updateOrganization = async (req) => {
       phone,
       welcomeText,
       aboutUsText,
+      facebook,
+      instagram,
+      linkedin,
     }, { where: { id } })
     const updatedOrganization = await Organization.findByPk(id)
     if (!updatedOrganization) {
