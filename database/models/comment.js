@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id',
         target_Key: 'userId'
       })
+      Comment.belongsTo(models.New, {
+        foreignKey: 'id',
+        target_Key: 'newId'
+      })
     }
   };
   Comment.init({

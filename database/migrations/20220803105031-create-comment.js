@@ -19,14 +19,14 @@ module.exports = {
         },
         allowNull: false,
       },
-      // postId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Posts',
-      //     key: 'id',
-      //   },
-      //   allowNull: false,
-      // },
+      newId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'News',
+          key: 'id',
+        },
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

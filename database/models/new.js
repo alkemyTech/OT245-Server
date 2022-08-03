@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       New.belongsTo(models.Category, {
         foreignKey: 'categoryId',
       })
+      New.hasMany(models.Comment,{
+        foreignKey: 'newId',
+      })
     }
   };
   New.init({
