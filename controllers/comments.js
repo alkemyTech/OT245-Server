@@ -1,7 +1,7 @@
 const createHttpError = require('http-errors')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
-const { getComments } = require('../services/comments')
+const { getComments, deleteComment } = require('../services/comments')
 
 module.exports = {
   get: catchAsync(async (req, res, next) => {
@@ -16,6 +16,25 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error retrieving comments] - [comments - GET]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  destroy: catchAsync(async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const token = req.header('Authorization')
+      const response = await deleteComment(id, token)
+      endpointResponse({
+        res,
+        message: 'Comment successfully deleted',
+        body: response,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error deleting comment] - [comments - DELETE]: ${error.message}`,
       )
       next(httpError)
     }
