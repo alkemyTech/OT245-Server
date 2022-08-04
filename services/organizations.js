@@ -19,7 +19,7 @@ exports.updateOrganization = async (req) => {
   try {
     const { id } = req.params
     const { body } = req
-    await Organization.update({ body }, { where: { id } })
+    await Organization.update({ ...body }, { where: { id } })
     const updatedOrganization = await Organization.findByPk(id)
     if (!updatedOrganization) {
       throw new ErrorObject('Not found', 404)
