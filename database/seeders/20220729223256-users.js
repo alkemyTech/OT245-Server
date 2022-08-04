@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     
- await queryInterface.bulkInsert('People', [
+ await queryInterface.bulkInsert('Users', [
   {
     firstName: 'Pinto',
     lastName:'unblo',
@@ -11,6 +11,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'piter',
@@ -19,6 +21,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Erica',
@@ -27,6 +31,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Sandra',
@@ -35,6 +41,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Jack ',
@@ -43,6 +51,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Finn',
@@ -51,6 +61,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Han',
@@ -59,6 +71,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Padmé',
@@ -67,6 +81,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Quira',
@@ -75,6 +91,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Assaj',
@@ -83,6 +101,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Kylo',
@@ -91,6 +111,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Lando',
@@ -99,6 +121,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Jabba',
@@ -107,6 +131,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Jyn',
@@ -115,6 +141,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Ahsoka',
@@ -123,6 +151,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Jinn',
@@ -131,6 +161,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Mace',
@@ -139,6 +171,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Cara',
@@ -147,6 +181,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/id/1133929113/es/vector/el-gr%C3%A1fico-de-negocios-de-an%C3%A1lisis-de-empresarios-y-seo-en-web.webp?s=612x612&w=is&k=20&c=wxzeo0RU88oIHMC7Y8Eou5rOLmDPLrrslwPLChbATKo=',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Boba',
@@ -155,6 +191,8 @@ module.exports = {
     password:'$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://media.istockphoto.com/vectors/and-metaverse-concepts-man-wearing-vr-glasses-and-touching-the-screen-vector-id1360137248',
     roleId:1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     firstName: 'Baby',
@@ -163,6 +201,8 @@ module.exports = {
     password: '$2b$10$5j0cnfOra3nfVdHU7aN8L.wsXKbC2qRhzsJdc8pm4zV6IkTGb7I1y',
     photo:'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/baby-yoda-mejor-personaje-star-wars-1626177290.jpg?crop=1xw:1xh;center,top&resize=980:*',
     roleId:2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }], {});
   },
 
