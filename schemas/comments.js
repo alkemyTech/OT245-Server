@@ -1,3 +1,6 @@
+const { User, New } = require('../database/models')
+const { ErrorObject } = require('../helpers/error')
+
 module.exports.comment = {
   body: {
     exists: {
@@ -20,6 +23,15 @@ module.exports.comment = {
     isInt: {
       errorMessage: 'The User_id must be a integer',
     },
+    custom: {
+      options: async (userId) => {
+        const commentUser = await User.findByPk(userId)
+        if (!commentUser) {
+          throw new ErrorObject('UserId not Found', 400)
+        }
+        return userId
+      },
+    },
   },
   newId: {
     exists: {
@@ -30,6 +42,15 @@ module.exports.comment = {
     },
     isInt: {
       errorMessage: 'The new_id must be a integer',
+    },
+    custom: {
+      options: async (newId) => {
+        const commentNew = await New.findByPk(newId)
+        if (!commentNew) {
+          throw new ErrorObject('NewId not Found', 400)
+        }
+        return newId
+      },
     },
   },
 }
