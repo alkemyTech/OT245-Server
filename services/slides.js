@@ -1,5 +1,6 @@
 const { ErrorObject } = require('../helpers/error')
 const { Slide } = require('../database/models')
+const postImageS3 = require('./images')
 
 exports.getSlides = async () => {
   try {
@@ -64,6 +65,25 @@ exports.updateSlide = async (req) => {
       throw new ErrorObject('Slide not found', 404)
     }
     return slide
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.postSlide = async (req) => {
+  try {
+    const { body, files } = req
+    if (!body.order) {
+      const newOrder = await Slide.findAll({
+        attributes: ['order'],
+        order: [['order', 'DESC']],
+        limit: 1,
+      })
+      body.order = newOrder.length > 0 ? newOrder[0].order + 1 : body.order = 1
+    }
+    body.image = await postImageS3(files.image)
+    const newSlide = await Slide.create(body)
+    return newSlide
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
