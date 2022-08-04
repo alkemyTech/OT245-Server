@@ -7,12 +7,13 @@ const {
 } = require('../controllers/news')
 const { schemaValidator } = require('../middlewares/validator')
 const { news } = require('../schemas/news')
+const { verifyAdmin } = require('../middlewares/admin')
 
 const router = express.Router()
 
-router.post('/', schemaValidator(news), post)
+router.post('/', verifyAdmin, schemaValidator(news), post)
 router.get('/:id', getById)
-router.put('/:id', put)
-router.delete('/:id', destroy)
+router.put('/:id', verifyAdmin, put)
+router.delete('/:id', verifyAdmin, destroy)
 
 module.exports = router
