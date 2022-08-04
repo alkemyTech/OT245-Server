@@ -11,6 +11,7 @@ module.exports = {
     aws_access_key_id: process.env.AWS_ACCESS_KEY_ID,
     aws_secret_access_key: process.env.AWS_SECRET_ACCESS,
     aws_region: process.env.AWS_REGION,
+    aws_bucket: process.env.AWS_BUCKET,
   },
 
   production: {
@@ -23,5 +24,6 @@ module.exports = {
     aws_access_key_id: process.env.AWS_ACCESS_KEY_ID,
     aws_secret_access_key: process.env.AWS_SECRET_ACCESS,
     aws_region: process.env.AWS_REGION,
+    aws_bucket: process.env.AWS_BUCKET,
   },
 }
