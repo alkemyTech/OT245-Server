@@ -18,7 +18,7 @@ exports.getOrganizations = async () => {
 exports.updateOrganization = async (req) => {
   try {
     const { id } = req.params
-    const { body } = req.body
+    const { body } = req
     await Organization.update({ body }, { where: { id } })
     const updatedOrganization = await Organization.findByPk(id)
     if (!updatedOrganization) {
