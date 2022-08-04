@@ -64,9 +64,8 @@ exports.createLogin = async (email, password) => {
     if (user) {
       const hash = user.password
       const login = this.getPassword(password, hash)
-      const token = await generateToken(user)
       if (login) {
-        return [user, token]
+        return user
       }
     }
     return null
