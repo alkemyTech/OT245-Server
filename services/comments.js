@@ -5,7 +5,9 @@ exports.getComments = async () => {
   try {
     const comments = await Comment.findAll({
       attributes: ['body'],
-      order: ['createdAt', 'DESC'],
+      order: [
+        ['createdAt', 'DESC'],
+      ],
     })
     return comments
   } catch (error) {
