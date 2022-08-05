@@ -10,7 +10,6 @@ const { schemaValidator } = require('../middlewares/validator')
 const { validateToken } = require('../middlewares/validateUser')
 const { news } = require('../schemas/news')
 const { verifyAdmin } = require('../middlewares/admin')
-const { validateToken } = require('../middlewares/validateUser')
 
 const router = express.Router()
 
