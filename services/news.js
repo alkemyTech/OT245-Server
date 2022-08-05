@@ -88,7 +88,6 @@ exports.pagination = async (limit = 10, currentPage = 1) => {
     
     const newsAmount = await New.count()
     const pagesAmount = Math.ceil(newsAmount / limit)
-    console.log(newsAmount, pagesAmount)
     
     if (currentPage > pagesAmount) {
       throw new ErrorObject('invalid page', 500)
