@@ -53,3 +53,16 @@ exports.deleteNew = async (id) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.getCommentsByNewId = async (id) => {
+  try {
+    const newById = await New.findByPk(id)
+    if (!newById) {
+      throw new ErrorObject('New not found', 404)
+    }
+    const comments = await newById.getComments()
+    return comments
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}

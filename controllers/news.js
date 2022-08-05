@@ -2,10 +2,7 @@ const createHttpError = require('http-errors')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
 const {
-  postNew,
-  getNewById,
-  updateNew,
-  deleteNew,
+  postNew, getNewById, updateNew, deleteNew, getCommentsByNewId,
 } = require('../services/news')
 
 module.exports = {
@@ -72,6 +69,24 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error deleting new] - [news - DELETE]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+
+  getCommentsByNewId: catchAsync(async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const comments = await getCommentsByNewId(id)
+      endpointResponse({
+        res,
+        message: 'New found successfully',
+        body: comments,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error finding comments of new] - [new - GET]: ${error.message}`,
       )
       next(httpError)
     }
