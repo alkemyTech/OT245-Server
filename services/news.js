@@ -57,7 +57,7 @@ exports.deleteNew = async (id) => {
 exports.getNews = async (page) => {
   try {
     const limit = 10
-    const numberPage = page ? parseInt(page) : 1
+    const numberPage = page ? parseInt(page, 10) : 1
     if (!Number.isInteger(numberPage) || numberPage <= 0) {
       throw new ErrorObject('query param not valid', 500)
     }
