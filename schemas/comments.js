@@ -15,13 +15,13 @@ module.exports.comment = {
   },
   userId: {
     exists: {
-      errorMessage: 'user_id cannot be null',
+      errorMessage: 'userId cannot be null',
     },
     notEmpty: {
-      errorMessage: 'user_id is empty',
+      errorMessage: 'userId is empty',
     },
     isInt: {
-      errorMessage: 'The User_id must be a integer',
+      errorMessage: 'The userId must be a integer',
     },
     custom: {
       options: async (userId) => {
@@ -35,13 +35,13 @@ module.exports.comment = {
   },
   newId: {
     exists: {
-      errorMessage: 'new_id cannot be null',
+      errorMessage: 'newId cannot be null',
     },
     notEmpty: {
-      errorMessage: 'new_id is empty',
+      errorMessage: 'newId is empty',
     },
     isInt: {
-      errorMessage: 'The new_id must be a integer',
+      errorMessage: 'The newId must be a integer',
     },
     custom: {
       options: async (newId) => {
