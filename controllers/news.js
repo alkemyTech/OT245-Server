@@ -77,7 +77,6 @@ module.exports = {
       next(httpError)
     }
   }),
-  
   get: catchAsync(async (req, res, next) => {
     try {
       const response = await getNews(req.query.page)
