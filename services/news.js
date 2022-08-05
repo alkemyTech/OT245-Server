@@ -53,3 +53,62 @@ exports.deleteNew = async (id) => {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
 }
+
+exports.getNews = async (page) => {
+  try {
+    const limit = 10
+    page = page ? parseInt(page) : 1
+    
+    if (!Number.isInteger(page) || page <= 0) {
+      throw new ErrorObject('query param not valid', 500)
+    }
+    
+    const offset = page && page >= 1 ? ((page - 1) * limit) : 0
+    const currentPage = await New.findAll({ offset, limit })
+    
+    const metadata = {}
+    const { previousPage, nextPage } = await this.pagination(limit, page)
+    if (Object.keys(previousPage).length !== 0) {
+      metadata.previousPage = previousPage
+    }
+    if (Object.keys(nextPage).length !== 0) {
+      metadata.nextPage = nextPage
+    }
+    
+    return { currentPage, metadata }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
+
+exports.pagination = async (limit = 10, currentPage = 1) => {
+  try {
+    const previousPage = {}
+    const nextPage = {}
+    
+    const newsAmount = await New.count()
+    const pagesAmount = Math.ceil(newsAmount / limit)
+    console.log(newsAmount, pagesAmount)
+    
+    if (currentPage > pagesAmount) {
+      throw new ErrorObject('invalid page', 500)
+    }
+    if (currentPage > 1) {
+      previousPage.url = `/news?page=${currentPage - 1}`
+      previousPage.content = await New.findAll({
+        offset: ((currentPage - 2) * limit),
+        limit,
+      })
+    }
+    if (currentPage < pagesAmount) {
+      nextPage.url = `/news?page=${currentPage + 1}`
+      nextPage.content = await New.findAll({
+        offset: (currentPage * limit),
+        limit,
+      })
+    }
+    return { previousPage, nextPage }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
