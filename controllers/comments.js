@@ -24,8 +24,7 @@ module.exports = {
   destroy: catchAsync(async (req, res, next) => {
     try {
       const { id } = req.params
-      const token = req.header('Authorization')
-      const response = await deleteComment(id, token)
+      const response = await deleteComment(id)
       endpointResponse({
         res,
         message: 'Comment successfully deleted',
