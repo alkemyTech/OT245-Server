@@ -87,29 +87,16 @@ exports.deleteUser = async (id) => {
   }
 }
 
-exports.updateUserById = async (req) => {
+exports.updateUserById = async (id, body) => {
   try {
-    const { id } = req.params
-    const {
-      firstName, lastName, email, password, photo,
-    } = req.body
     const user = await User.findByPk(id)
-    if (user) {
-      const hashedPassword = await bcrypt.hash(user.password, 10)
-      user.password = hashedPassword
-      await User.update(
-        {
-          firstName,
-          lastName,
-          email,
-          password,
-          photo,
-        },
-        { where: { id: user.id } },
-      )
-      return user
+    if (!user) {
+      throw new ErrorObject('UserId updated failed', 404)
     }
-    throw new ErrorObject('UserId not found', 404)
+    const hashedPassword = await bcrypt.hash(body.password, 10)
+    body.password = hashedPassword
+    await user.update(body)
+    return user
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
