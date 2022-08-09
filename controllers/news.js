@@ -6,6 +6,7 @@ const {
   getNewById,
   updateNew,
   deleteNew,
+  getNews,
 } = require('../services/news')
 
 module.exports = {
@@ -72,6 +73,22 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error deleting new] - [news - DELETE]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+  get: catchAsync(async (req, res, next) => {
+    try {
+      const response = await getNews(req.query.page)
+      endpointResponse({
+        res,
+        message: 'News retrieved successfully',
+        body: response,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error retrieving news] - [news - GET]: ${error.message}`,
       )
       next(httpError)
     }
