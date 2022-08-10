@@ -5,6 +5,93 @@ const {
   postMember, updateMember, deleteMember, getMembers,
 } = require('../services/members')
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Member:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: integer
+ *        name:
+ *          type: string
+ *        image:
+ *          type: string
+ *        createdAt:
+ *          type: integer
+ *          format: date
+ *        updatedAt:
+ *          type: integer
+ *          format: date
+ *        deletedAt:
+ *          type: integer
+ *          format: date
+ *      example:
+ *        name: member 1
+ *        image: https://image.com/member1.jpg
+ *        createdAt: 2022-08-10T12:30:55.77
+ *        updatedAt: 2022-08-10T12:30:55.77
+ *        deletedAt: null
+ */
+
+/**
+ * @swagger
+ *  /members:
+ *  post:
+ *    summary: create members
+ *    tags: [Member]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Member'
+ *    responses:
+ *      200:
+ *        description: Member created successfuly
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                status:
+ *                  type: boolean
+ *                code:
+ *                  type: integer
+ *                message:
+ *                  type: string
+ *                body:
+ *                  type: object
+ *                  properties:
+ *                    id:
+ *                      type: integer
+ *                    name:
+ *                      type: string
+ *                    image:
+ *                      type: string
+ *                    createdAt:
+ *                      type: string
+ *                      format: date-time
+ *                    updatedAt:
+ *                      type: string
+ *                      format: date-time
+ *                    deletedAt:
+ *                      type: string
+ *                      format: date-time
+ *                example:
+ *                  status: true
+ *                  code: 200
+ *                  message: Member created successfuly
+ *                  body:
+ *                    id: 1
+ *                    name: Member 1
+ *                    image: https://image.com/member1.jpg
+ *                    createdAt: 2022-08-10T12:30:55.77
+ *                    updatedAt: 2022-08-10T12:30:55.77
+ */
+
 module.exports = {
   post: catchAsync(async (req, res, next) => {
     try {
