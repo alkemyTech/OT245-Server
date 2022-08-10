@@ -33,11 +33,10 @@ const { deleteTestimonial } = require('../services/testimonials')
   *         image: https://someurl.to/a-picture.png
   *         content: some mock content for the testimonial
   *         createdAt: 2022-08-09 19:50:30
-  *         updatedAt: 2022-08-09 19:50:30 
-  *         deletedAt: null 
+  *         updatedAt: 2022-08-09 19:50:30
+  *         deletedAt: null
   *
   */
-
 
 /**
   * @swagger
@@ -122,7 +121,7 @@ const { deleteTestimonial } = require('../services/testimonials')
   *   responses:
   *     200:
   *       description: user deleted successfuly
-  *       content: 
+  *       content:
   *         application/json:
   *           schema:
   *             type: object
@@ -151,7 +150,7 @@ const { deleteTestimonial } = require('../services/testimonials')
   *     500:
   *       description: Internal server error
   */
-  
+
 /**
   * @swagger
   *  /testimonials/{id}:
@@ -175,7 +174,7 @@ const { deleteTestimonial } = require('../services/testimonials')
   *   responses:
   *     200:
   *       description: testimonial update successfuly
-  *       content: 
+  *       content:
   *         application/json:
   *           schema:
   *             type: object
@@ -227,7 +226,7 @@ const { deleteTestimonial } = require('../services/testimonials')
   *       description: Internal server error
   *
   */
-  
+
 module.exports = {
   post: catchAsync(async (req, res, next) => {
     try {
