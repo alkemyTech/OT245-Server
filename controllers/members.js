@@ -37,10 +37,10 @@ const {
 
 /**
  * @swagger
- *  /members:
+ * /members:
  *  post:
- *    summary: create members
  *    tags: [Member]
+ *    summary: Create members
  *    requestBody:
  *      required: true
  *      content:
@@ -80,16 +80,186 @@ const {
  *                    deletedAt:
  *                      type: string
  *                      format: date-time
- *                example:
- *                  status: true
- *                  code: 200
- *                  message: Member created successfuly
- *                  body:
- *                    id: 1
- *                    name: Member 1
- *                    image: https://image.com/member1.jpg
- *                    createdAt: 2022-08-10T12:30:55.77
- *                    updatedAt: 2022-08-10T12:30:55.77
+ *              example:
+ *                status: true
+ *                code: 200
+ *                message: Member created successfuly
+ *                body:
+ *                  id: 1
+ *                  name: Member 1
+ *                  image: https://image.com/member1.jpg
+ *                  createdAt: 2022-08-10T12:30:55.77
+ *                  updatedAt: 2022-08-10T12:30:55.77
+ *      401:
+ *        description: Unauthorized user
+ *      403:
+ *        description: Token is required
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /members/{id}:
+ *  put:
+ *    tags: [Member]
+ *    summary: Update members
+ *    parameters:
+ *    - in: path
+ *      name: id
+ *    schema:
+ *      type: integer
+ *      required: true
+ *      description: ID numeric of Member to update.
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Member'
+ *    responses:
+ *      200:
+ *        description: Member updated successfuly
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                status:
+ *                  type: boolean
+ *                code:
+ *                  type: integer
+ *                message:
+ *                  type: string
+ *                body:
+ *                  type: object
+ *                  properties:
+ *                    id:
+ *                      type: integer
+ *                    name:
+ *                      type: string
+ *                    image:
+ *                      type: string
+ *                    createdAt:
+ *                      type: string
+ *                      format: date-time
+ *                    updatedAt:
+ *                      type: string
+ *                      format: date-time
+ *                    deletedAt:
+ *                      type: string
+ *                      format: date-time
+ *              example:
+ *                status: true
+ *                code: 200
+ *                message: Member updated successfuly
+ *                body:
+ *                  id: 1
+ *                  name: Member 1 updated
+ *                  image: https://image.com/member1.jpg
+ *                  createdAt: 2022-08-10T12:30:55.77
+ *                  updatedAt: 2022-08-10T12:30:55.77
+ *      401:
+ *        description: Unauthorized user
+ *      403:
+ *        description: Token is required
+ *      404:
+ *        description: Member not found
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /members/{id}:
+ *  delete:
+ *    tags: [Member]
+ *    summary: Delete member
+ *    parameters:
+ *    - in: path
+ *      name: id
+ *    schema:
+ *      type: integer
+ *      required: true
+ *      description: ID numeric of Member to delete.
+ *    responses:
+ *      200:
+ *        description: Member successfuly deleted
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                status:
+ *                  type: boolean
+ *                code:
+ *                  type: integer
+ *                message:
+ *                  type: string
+ *                body:
+ *                  type: object
+ *                  properties:
+ *                    id:
+ *                      type: integer
+ *                    name:
+ *                      type: string
+ *                    image:
+ *                      type: string
+ *                    createdAt:
+ *                      type: string
+ *                      format: date-time
+ *                    updatedAt:
+ *                      type: string
+ *                      format: date-time
+ *                    deletedAt:
+ *                      type: string
+ *                      format: date-time
+ *              example:
+ *                status: true
+ *                code: 200
+ *                message: Member updated successfuly
+ *                body:
+ *                  id: 1
+ *                  name: Member 1 updated
+ *                  image: https://image.com/member1.jpg
+ *                  createdAt: 2022-08-10T12:30:55.77
+ *                  updatedAt: 2022-08-10T12:30:55.77
+ *                  deletedAt: 2022-08-10T12:30:55.77
+ *      401:
+ *        description: Unauthorized user
+ *      403:
+ *        description: Token is required
+ *      404:
+ *        description: Member not found
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /members:
+ *  get:
+ *    tags: [Member]
+ *    summary: List of members.
+ *    responses:
+ *      200:
+ *        description: List of members in database.
+ *        content:
+ *          application/json:
+ *            schema:
+ *            type: array
+ *            items:
+ *              properties:
+ *                id:
+ *                  type: integer
+ *                  example: 1
+ *                name:
+ *                  type: string
+ *                  example: Member 1
+ *                image:
+ *                  type: string
+ *                  example: https://image.com/member1.jpg
  */
 
 module.exports = {
