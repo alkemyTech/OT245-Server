@@ -12,7 +12,7 @@ exports.createUser = async (body) => {
     }
     const hashedPassword = await bcrypt.hash(body.password, 10)
     body.password = hashedPassword
-    body.roleId = 1
+    body.roleId = 2
     const newUser = await User.create(body)
     if (!newUser) {
       throw new ErrorObject('User registration failed', 404)
