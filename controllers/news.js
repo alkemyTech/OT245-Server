@@ -3,6 +3,11 @@ const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
 const {
   postNew, getNewById, updateNew, deleteNew, getCommentsByNewId,
+  postNew,
+  getNewById,
+  updateNew,
+  deleteNew,
+  getNews,
 } = require('../services/news')
 
 module.exports = {
@@ -74,6 +79,23 @@ module.exports = {
     }
   }),
 
+  get: catchAsync(async (req, res, next) => {
+    try {
+      const response = await getNews(req.query.page)
+      endpointResponse({
+        res,
+        message: 'News retrieved successfully',
+        body: response,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error retrieving news] - [news - GET]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+  
   getCommentsByNewId: catchAsync(async (req, res, next) => {
     try {
       const { id } = req.params

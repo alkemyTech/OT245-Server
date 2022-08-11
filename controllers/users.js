@@ -89,7 +89,9 @@ module.exports = {
 
   put: catchAsync(async (req, res, next) => {
     try {
-      const updatedUser = await updateUserById(req)
+      const { id } = req.params
+      const { body } = req
+      const updatedUser = await updateUserById(id, body)
       endpointResponse({
         res,
         message: 'User successfuly updated',
