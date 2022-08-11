@@ -81,7 +81,7 @@ const {
  *          status: true
  *          message: User successfuly created
  *          body:
- *           userToker: 546758dr4t342323g
+ *           userToken: 546758dr4t342323g
  */
 // loggin user
 /**
