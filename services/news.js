@@ -114,3 +114,7 @@ exports.pagination = async (limit = 10, currentPage = 1) => {
       })
     }
     return { previousPage, nextPage }
+  } catch (error) {
+    throw new ErrorObject(error.message, error.statusCode || 500)
+  }
+}
