@@ -95,7 +95,6 @@ module.exports = {
       next(httpError)
     }
   }),
-  
   getCommentsByNewId: catchAsync(async (req, res, next) => {
     try {
       const { id } = req.params
