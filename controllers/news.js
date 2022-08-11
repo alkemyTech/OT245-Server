@@ -2,12 +2,12 @@ const createHttpError = require('http-errors')
 const { endpointResponse } = require('../helpers/success')
 const { catchAsync } = require('../helpers/catchAsync')
 const {
-  postNew, getNewById, updateNew, deleteNew, getCommentsByNewId,
   postNew,
   getNewById,
   updateNew,
   deleteNew,
   getNews,
+  getCommentsByNewId,
 } = require('../services/news')
 
 module.exports = {
