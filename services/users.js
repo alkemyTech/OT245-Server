@@ -19,7 +19,7 @@ exports.createUser = async (body) => {
     }
     await postMail(newUser.email)
     const token = await generateToken(newUser)
-    return token
+    return { newUser, token }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
