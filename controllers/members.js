@@ -60,7 +60,7 @@ module.exports = {
 
   get: catchAsync(async (req, res, next) => {
     try {
-      const members = await getMembers()
+      const members = await getMembers(req.query.page)
       endpointResponse({
         res,
         message: 'Members retrieved successfully',
