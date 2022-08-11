@@ -50,12 +50,12 @@ module.exports = {
   login: catchAsync(async (req, res, next) => {
     try {
       const { email, password } = req.body
-      const user = await createLogin(email, password)
-      if (user) {
+      const response = await createLogin(email, password)
+      if (response) {
         endpointResponse({
           res,
           message: 'Login successfuly created',
-          body: user,
+          body: response,
         })
       } else {
         throw new ErrorObject('{ok: false}', 403)
