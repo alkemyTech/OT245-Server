@@ -11,6 +11,7 @@ const slides = require('./slides')
 const testimonials = require('./testimonials')
 const members = require('./members')
 const comments = require('./comments')
+const swagger = require('./swagger')
 
 const router = express.Router()
 
@@ -27,5 +28,6 @@ router.use('/slides', slides)
 router.use('/testimonials', testimonials)
 router.use('/members', members)
 router.use('/comments', comments)
+router.use('/api/docs', swagger)
 
 module.exports = router
