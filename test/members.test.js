@@ -29,8 +29,8 @@ describe('Members', () => {
 			})
       after(async () => {
         await Member.destroy({ where: { name: 'test1' } })
-      }
-      )
+      })
+      
 
 describe('GET /members', () => {
     it('should get a list of all members', async () => {
@@ -84,8 +84,6 @@ describe('DELETE /members/:id', () => {
   })
 })
 
-
-// ERRORES 
 describe('GET /members without token', () => {
   it('should return a 403 error', async () => {
     const res = await request(app)
@@ -117,7 +115,5 @@ describe('POST /members with invalid fields', () => {
           }
       )
     })
-
-
 })
 
