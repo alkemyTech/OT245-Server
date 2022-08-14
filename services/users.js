@@ -12,14 +12,14 @@ exports.createUser = async (body) => {
     }
     const hashedPassword = await bcrypt.hash(body.password, 10)
     body.password = hashedPassword
-    body.roleId = 1
+    body.roleId = 2
     const newUser = await User.create(body)
     if (!newUser) {
       throw new ErrorObject('User registration failed', 404)
     }
     await postMail(newUser.email)
     const token = await generateToken(newUser)
-    return token
+    return { newUser, token }
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -64,9 +64,9 @@ exports.createLogin = async (email, password) => {
     if (user) {
       const hash = user.password
       const login = this.getPassword(password, hash)
+      const token = await generateToken(user)
       if (login) {
-        const token = await generateToken(user)
-        return token
+        return { user, token }
       }
     }
     return null
