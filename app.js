@@ -8,11 +8,6 @@ const fileupload = require('express-fileupload')
 
 require('dotenv').config()
 
-// Documentation Swagger Interface
-const { serve, setup } = require('swagger-ui-express')
-const { configSwagger } = require('./config/config.swagger')
-const swaggerJSDocs = require('swagger-jsdoc')(configSwagger) // eslint-disable-line
-
 const indexRouter = require('./routes/index')
 
 const port = process.env.PORT || 3001
@@ -32,7 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(fileupload())
 
 app.use('/', indexRouter)
-app.use('/api/docs', serve, setup(swaggerJSDocs))
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
