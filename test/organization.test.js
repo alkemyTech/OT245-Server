@@ -38,6 +38,8 @@ describe('PUT /organization/public/:id', () => {
   const ongSchema = {
     name: 'demo',
     image: 'someurl.io',
+    address: 'Cloverfield Lane 10',
+    phone: 1160112988,
     email: 'test@demo.com',
     welcomeText: 'welcome text',
     aboutUsText: 'about us text',
