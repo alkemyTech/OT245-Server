@@ -12,6 +12,194 @@ const {
   getAllUsers,
 } = require('../services/users')
 
+/**
+ * @swagger
+ * components:
+ *  securitySchemes:
+ *   bearerAuth:
+ *    type: http
+ *    scheme: bearer
+ *    bearerFormat: JWT
+ *    in: header
+ *    name: Authorization
+ *    description: Bearer token
+ *    required: true
+ */
+/**
+ * @swagger
+ * tags:
+ *  name: Auth
+ *  description: Auth routes
+ */
+/**
+ * @swagger
+ * /auth/register:
+ *  post:
+ *   tags:
+ *   - Auth
+ *   summary: Register a new user
+ *   description: Register a new user
+ *   requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         type: object
+ *         properties:
+ *          firstName:
+ *           type: string
+ *           required: true
+ *          lastName:
+ *           type: string
+ *           required: true
+ *          email:
+ *           type: string
+ *           required: true
+ *           format: email
+ *          password:
+ *           type: string
+ *           required: true
+ *           format: password
+ *   responses:
+ *     '200':
+ *      description: User successfuly created
+ *      content:
+ *       application/json:
+ *        schema:
+ *         type: object
+ *         properties:
+ *          status:
+ *           type: boolean
+ *          message:
+ *           type: string
+ *          body:
+ *           type: object
+ *           properties:
+ *            userToken:
+ *             type: string
+ *         example:
+ *          status: true
+ *          message: User successfuly created
+ *          body:
+ *           userToken: 546758dr4t342323g
+ */
+// loggin user
+/**
+ * @swagger
+ * /auth/login:
+ *  post:
+ *   tags:
+ *   - Auth
+ *   summary: Login a user
+ *   description: Login a user
+ *   requestBody:
+ *    required: true
+ *    content:
+ *     application/json:
+ *      schema:
+ *       type: object
+ *       required:
+ *        - email
+ *        - password
+ *       properties:
+ *        email:
+ *         type: string
+ *         format: email
+ *        password:
+ *         type: string
+ *         format: password
+ *   responses:
+ *    '200':
+ *     description: Login successfully created
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *          status:
+ *           type: boolean
+ *          message:
+ *           type: string
+ *          body:
+ *           type: object
+ *           properties:
+ *            user:
+ *             type: object
+ *             properties:
+ *              id:
+ *               type: string
+ *              firstName:
+ *               type: string
+ *              lastName:
+ *               type: string
+ *              email:
+ *               type: string
+ *              password:
+ *               type: string
+ *              createdAt:
+ *               type: string
+ *              updatedAt:
+ *               type: string
+ *            token:
+ *             type: string
+ *             format: jwt
+ *        example:
+ *         status: true,
+ *         message: Login successfully created
+ *         body:
+ *          user:
+ *           id: 1
+ *           firstName: Test
+ *           lastName: User
+ *           email: Test@gmail.com
+ *           password: password
+ *           createdAt: '2022-04-01T00:00:00.000Z'
+ *           updatedAt: '2022-04-01T00:00:00.000Z'
+ *          token: 546758dr4t342323g
+ */
+// Authenticate User
+/**
+ * @swagger
+ * /auth/me:
+ *  get:
+ *   tags:
+ *   - Auth
+ *   summary: Get Authorized user
+ *   description: Get Authorized user
+ *   security:
+ *    - bearerAuth: {}
+ *   responses:
+ *    '200':
+ *     description: Authorized user successfully retrieved
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         status:
+ *          type: boolean
+ *         message:
+ *          type: string
+ *         body:
+ *          type: object
+ *          properties:
+ *           user:
+ *            type: object
+ *            properties:
+ *             id:
+ *              type: string
+ *             firstName:
+ *              type: string
+ *             lastName:
+ *              type: string
+ *             email:
+ *              type: string
+ *             createdAt:
+ *              type: string
+ *             updatedAt:
+ *              type: string
+ */
+
 module.exports = {
   list: catchAsync(async (req, res, next) => {
     try {
