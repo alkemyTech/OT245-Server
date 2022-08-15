@@ -1,8 +1,6 @@
-const chai = require('chai');
 const { expect } = require('chai');
 const request = require('supertest');
 const app = require('../app');
-const { Activity } = require('../database/models');
 
 describe('Test - Activities', ()=>{
     let activityId;
@@ -18,7 +16,7 @@ describe('[POST] /activities', ()=>{
         })
         .expect('Content-Type', /json/)
         token = res.body.token
-        console.log('token---->', token);
+        // console.log('token---->', token);
     });
 
     it('Activity created successfully',async () => {
@@ -101,6 +99,19 @@ describe('[PUT] /activities/:id', ()=>{
         expect(res).to.be.an('object')
         expect(body).to.have.property('id', activityId)
       });
+
+    it('Error updating activity - Not found', async()=>{
+        await request(app).put(`/activities/100`)
+        .send({
+            name: 'Activity1 - updated',
+            content: 'content of activity1 updated',
+            image: 'http://abc.com/imgnew.jpg'
+          })
+        .set('Authorization', token)
+        .set("Accept", "text/html; charset=utf-8")
+        .expect('Content-Type', /text\/html/)
+        .expect(404)
+    });
 });
 });
 
