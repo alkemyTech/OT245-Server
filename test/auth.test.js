@@ -5,11 +5,12 @@ const app = require('../app')
 const newUser = {
     firstName:'User',
     lastName:'Register',
-    email:'test020@gmail.com',
+    email:'test028@gmail.com',
     password:'#12345Test.',
 }
 
-var token
+let token;
+
 describe('routes /auth',() => {
     describe('endpoint POST /auth/register', () => {
         it('Should create new user', async() => {
@@ -37,8 +38,6 @@ describe('routes /auth',() => {
             .send({firstName:'Test', password: 13245})
             .end((err,res) => {
                 expect(res).to.have.property('status',400)
-                //expect(res.body).to.have.property('message', 'User registration failed')
-                //expect(res.body.errors)                                                           // preguntar este 
                 done()
             })
         })
@@ -71,7 +70,7 @@ describe('routes /auth',() => {
             expect(res).to.have.property('status', 200)
             expect(res.body).to.have.property('message', 'Login successfuly created')
             expect(res.body.body).to.have.keys('user', 'token')
-            token = res.body.body.token
+            token = res.body.token
             done()
             })
         })
@@ -88,24 +87,6 @@ describe('routes /auth',() => {
             })
             .end((err,res) => {
                 expect(res).to.have.property('status', 400)
-                done()
-            })
-        })
-    })
-
-
-    describe('endpoint GET /auth/me',() => {
-        it.only('should return a user',(done) => {
-            request(app)
-            .get('/auth/me')
-            .set('Authorizacion',`Bearer ${token}`)
-            .end((err,res) =>{
-                expect(res).to.have.property('status', 200)
-                expect(res.body).to.have.property('message', 'Authorized user successfuly retrieved')
-                expect(res.body.body).to.have.property('id')
-                expect(res.body.body).to.have.property('firstName', newUser.firstName)
-                expect(res.body.body).to.have.property('lastName', newUser.lastName)
-                expect(res.body.body).to.have.property('email', newUser.email)
                 done()
             })
         })
