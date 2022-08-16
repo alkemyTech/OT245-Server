@@ -92,7 +92,7 @@ const {
  *              example:
  *                status: true
  *                code: 200
- *                message: Member created successfuly
+ *                message: New created successfuly
  *                body:
  *                  id: 1
  *                  name: New 1
@@ -165,7 +165,7 @@ const {
  *              example:
  *                status: true
  *                code: 200
- *                message: Member updated successfuly
+ *                message: New updated successfuly
  *                body:
  *                  id: 1
  *                  name: New 1 updated
