@@ -5,8 +5,8 @@ const { postActivity, updateActivity } = require('../services/activities')
 
 const post = catchAsync(async (req, res, next) => {
   try {
-    const { body } = req.body
-    const response = await postActivity({ body })
+    const { body } = req
+    const response = await postActivity(body)
     endpointResponse({
       res,
       message: 'Activity created successfully',
