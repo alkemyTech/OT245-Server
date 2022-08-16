@@ -16,21 +16,14 @@ exports.postMember = async (body) => {
   }
 }
 
-exports.updateMember = async (req) => {
+exports.updateMember = async (id, body) => {
   try {
-    const { id } = req.params
-    const { name, image } = req.body
     const member = await Member.findByPk(id)
-    if (member) {
-      await Member.update({
-        name,
-        image,
-      }, { where: { id } })
-    }
     if (!member) {
       throw new ErrorObject('Member not found', 404)
     }
-    return member
+    const updatedMember = await member.update(body)
+    return updatedMember
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
@@ -40,7 +33,7 @@ exports.deleteMember = async (id) => {
   try {
     const member = await Member.findByPk(id)
     if (!member) {
-      throw new ErrorObject('Member not found', 400)
+      throw new ErrorObject('Member not found', 404)
     }
     await member.destroy()
     return member

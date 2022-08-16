@@ -12,20 +12,14 @@ exports.postActivity = async (activity) => {
   }
 }
 
-exports.updateActivity = async (req) => {
+exports.updateActivity = async (id, body) => {
   try {
-    const { id } = req.params
-    const { name, content, image } = req.body
-    await Activity.update({
-      name,
-      content,
-      image,
-    }, { where: { id } })
     const activity = await Activity.findByPk(id)
     if (!activity) {
       throw new ErrorObject('Activity not found', 404)
     }
-    return activity
+    const updatedActivity = await activity.update(body)
+    return updatedActivity
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
