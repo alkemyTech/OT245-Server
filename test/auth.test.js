@@ -5,7 +5,7 @@ const app = require('../app')
 const newUser = {
     firstName:'User',
     lastName:'Register',
-    email:'test028@gmail.com',
+    email:'test051@gmail.com',
     password:'#12345Test.',
 }
 
@@ -83,10 +83,10 @@ describe('routes /auth',() => {
             .post('/auth/login')
             .send({
                 email: newUser.email,
-                password:'TestError'
+                password:'TestError435.'
             })
             .end((err,res) => {
-                expect(res).to.have.property('status', 400)
+                expect(res).to.have.property('status', 403)
                 done()
             })
         })
