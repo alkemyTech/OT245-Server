@@ -4,6 +4,7 @@ const {
   getById,
   put,
   destroy,
+  getCommentsByNewId,
   get,
 } = require('../controllers/news')
 const { schemaValidator } = require('../middlewares/validator')
@@ -20,5 +21,6 @@ router.delete('/:id', destroy)
 router.get('/', validateToken, get)
 router.put('/:id', validateToken, verifyAdmin, put)
 router.delete('/:id', validateToken, verifyAdmin, destroy)
+router.get('/:id/comments', getCommentsByNewId)
 
 module.exports = router

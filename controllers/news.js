@@ -7,6 +7,7 @@ const {
   updateNew,
   deleteNew,
   getNews,
+  getCommentsByNewId,
 } = require('../services/news')
 
 module.exports = {
@@ -77,6 +78,7 @@ module.exports = {
       next(httpError)
     }
   }),
+
   get: catchAsync(async (req, res, next) => {
     try {
       const response = await getNews(req.query.page)
@@ -89,6 +91,23 @@ module.exports = {
       const httpError = createHttpError(
         error.statusCode,
         `[Error retrieving news] - [news - GET]: ${error.message}`,
+      )
+      next(httpError)
+    }
+  }),
+  getCommentsByNewId: catchAsync(async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const comments = await getCommentsByNewId(id)
+      endpointResponse({
+        res,
+        message: 'New found successfully',
+        body: comments,
+      })
+    } catch (error) {
+      const httpError = createHttpError(
+        error.statusCode,
+        `[Error finding comments of new] - [new - GET]: ${error.message}`,
       )
       next(httpError)
     }
