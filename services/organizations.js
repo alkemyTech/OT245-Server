@@ -15,15 +15,13 @@ exports.getOrganizations = async () => {
   }
 }
 
-exports.updateOrganization = async (req) => {
+exports.updateOrganization = async (id, body) => {
   try {
-    const { id } = req.params
-    const { body } = req
-    await Organization.update({ ...body }, { where: { id } })
-    const updatedOrganization = await Organization.findByPk(id)
-    if (!updatedOrganization) {
-      throw new ErrorObject('Not found', 404)
+    const organization = await Organization.findByPk(id)
+    if (!organization) {
+      throw new ErrorObject('Organization not found', 404)
     }
+    const updatedOrganization = await organization.update(body)
     return updatedOrganization
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)

@@ -281,7 +281,9 @@ module.exports = {
 
   put: catchAsync(async (req, res, next) => {
     try {
-      const response = await updateTestimonial(req)
+      const { id } = req.params
+      const { body } = req
+      const response = await updateTestimonial(id, body)
       endpointResponse({
         res,
         message: 'Testimonial updated successfully',

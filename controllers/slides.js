@@ -61,7 +61,9 @@ module.exports = {
 
   put: catchAsync(async (req, res, next) => {
     try {
-      const response = await updateSlide(req)
+      const { id } = req.params
+      const { body } = req
+      const response = await updateSlide(id, body)
       endpointResponse({
         res,
         message: 'Slide updated successfully',

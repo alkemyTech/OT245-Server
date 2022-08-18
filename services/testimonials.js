@@ -36,25 +36,14 @@ exports.deleteTestimonial = async (id) => {
   }
 }
 
-exports.updateTestimonial = async (req) => {
+exports.updateTestimonial = async (id, body) => {
   try {
-    const { id } = req.params
-    const { name, image, content } = req.body
     const testimonial = await Testimonial.findByPk(id)
-    if (testimonial) {
-      await Testimonial.update(
-        {
-          name,
-          image,
-          content,
-        },
-        { where: { id } },
-      )
-    }
     if (!testimonial) {
       throw new ErrorObject('Testimonial not found', 404)
     }
-    return testimonial
+    const updatedTestimonial = await testimonial.update(body)
+    return updatedTestimonial
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
   }
