@@ -4,7 +4,7 @@ const { Category } = require('../database/models')
 exports.getCategories = async (page) => {
   try {
     if (page === undefined) {
-      return await Category.findAll({})
+      return await Category.findAll({ attributes: ['name'] })
     }
     const { limit, offset, nro } = this.getPagination(page)
     const data = await Category.findAndCountAll({ attributes: ['name'], limit, offset })
