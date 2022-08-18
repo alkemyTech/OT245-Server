@@ -3,6 +3,9 @@ const { Category } = require('../database/models')
 
 exports.getCategories = async (page) => {
   try {
+    if (page === undefined) {
+      return await Category.findAll({})
+    }
     const { limit, offset, nro } = this.getPagination(page)
     const data = await Category.findAndCountAll({ attributes: ['name'], limit, offset })
     return this.getPagingData(data, nro, limit)
@@ -38,11 +41,14 @@ exports.updateCategory = async (req) => {
     const { id } = req.params
     const { name, description, image } = req.body
     await this.getCategoryById(id)
-    const updatedCategory = await Category.update({
-      name,
-      description,
-      image,
-    }, { where: { id } })
+    const updatedCategory = await Category.update(
+      {
+        name,
+        description,
+        image,
+      },
+      { where: { id } },
+    )
     return updatedCategory
   } catch (error) {
     throw new ErrorObject(error.message, error.statusCode || 500)
@@ -83,7 +89,7 @@ exports.getPagingData = async (data, page, limit) => {
   if (page > finalPage) {
     throw new ErrorObject(`page ${page} not found, maximum number of pages: ${finalPage}`, 404)
   }
-  const nextPage = totalItems / limit > page ? (currentPage + 1) : null
+  const nextPage = totalItems / limit > page ? currentPage + 1 : null
   const previousPage = currentPage > 1 && currentPage <= finalPage ? currentPage - 1 : null
   const metadata = { finalPage }
   if (previousPage) metadata.previousPage = url + previousPage
