@@ -11,7 +11,7 @@ exports.schemaValidator = (schema) => [
       const errors = error.array().map((err) => err.msg)
       const httpError = createHttpError(
         400,
-        `[Error on data validation] - [register - POST]: ${errors}`,
+        `[Error on data validation] - [${(req.baseUrl).slice(1)} - ${req.method}]: ${errors}`,
       )
       return next(httpError)
     }
