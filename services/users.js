@@ -94,8 +94,10 @@ exports.updateUserById = async (id, body) => {
     if (!user) {
       throw new ErrorObject('UserId updated failed', 404)
     }
-    const hashedPassword = await bcrypt.hash(body.password, 10)
-    body.password = hashedPassword
+    if (body.password) {
+      const hashedPassword = await bcrypt.hash(body.password, 10)
+      body.password = hashedPassword
+    }
     await user.update(body)
     return user
   } catch (error) {
